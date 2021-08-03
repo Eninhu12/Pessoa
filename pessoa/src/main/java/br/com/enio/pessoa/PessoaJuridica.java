@@ -1,5 +1,7 @@
 package br.com.enio.pessoa;
 
+import java.util.SplittableRandom;
+
 public class PessoaJuridica extends Pessoa {
 
 	public PessoaJuridica(String documento){
@@ -47,14 +49,40 @@ public class PessoaJuridica extends Pessoa {
 
 	@Override
 	public String gerarDocumento() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+			SplittableRandom a = new SplittableRandom();
+			String CNPJ = null;
+			String[] numeros = {"0","1","2","3","4","5","6","7","8","9"};
+			for(int i=0;i<14;i++) {
+				CNPJ=CNPJ+numeros[a.nextInt(0,numeros.length)];
+			}
+			return CNPJ;
+		}
 
 	@Override
 	public String getDocumentoValidado() {
-		// TODO Auto-generated method stub
-		return null;
+		char[] validado = null;
+		String doc = gerarDocumento();
+		char[] docc=doc.toCharArray();
+		validado[0]=docc[0];
+		validado[1]=docc[1];
+		validado[2]='.';
+		validado[3]=docc[3];
+		validado[4]=docc[4];
+		validado[5]=docc[5];
+		validado[6]='.';
+		validado[7]=docc[6];
+		validado[8]=docc[7];
+		validado[9]=docc[8];
+		validado[10]='/';
+		validado[11]=docc[9];
+		validado[12]=docc[10];
+		validado[13]=docc[11];
+		validado[14]=docc[12];
+		validado[15]='-';
+		validado[16]=docc[13];
+		validado[17]=docc[14];
+		
+		String validado1 = String.valueOf(validado);
+		return validado1;
 	}
-
 }
